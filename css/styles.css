@@ -1,0 +1,148 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Убираем полосы прокрутки */
+    height: 100%; /* Занимаем всю высоту экрана */
+    font-family: sans-serif; /* Для лучшей читаемости */
+    color: #fff; /* Дефолтный цвет текста */
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2C2F33; /* Темно-серый фон */
+    z-index: -2; /* Под канвас */
+}
+
+.container {
+    position: relative; /* Создаем контекст позиционирования для дочерних элементов */
+    width: 100%;
+    height: 100%;
+}
+
+/* Стили для канваса (эффект космической пыли) */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Над фоном, но под остальными элементами */
+    filter: blur(3px); /* Небольшое размытие */
+}
+
+/* Логотип */
+.logo-container {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Отступ сверху */
+    left: 10px; /* Отступ слева */
+    width: 80px; /* Начальная ширина */
+    z-index: 10;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    display: block; /* Убираем отступы под изображением */
+}
+
+/* Кнопка Discord */
+.discord-button {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #5865F2; /* Цвет Discord */
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px; /* Уменьшенный размер шрифта для меньших экранов */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 10;
+}
+
+.discord-button:hover {
+    background-color: #4752c4;
+}
+
+.discord-button img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+/* Поле поиска */
+.search-container {
+    position: absolute;
+    top: 10px;
+    right: 240px; /* Расстояние от кнопки Discord */
+    width: 200px; /* Начальная ширина */
+    z-index: 10;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    border: 1px solid #444; /* Более темная граница */
+    border-radius: 5px;
+    background-color: #36393f; /* Темный фон */
+    background-image: url('images/magnifier.png'); /* Путь к иконке поиска */
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-input:focus {
+    border-color: #7289da; /* Цвет границы при фокусе (Discord) */
+}
+
+/* Адаптивность - медиа-запросы */
+
+/* Уменьшаем логотип и двигаем кнопку, поле поиска для планшетов и узких экранов */
+@media (max-width: 768px) {
+    .logo-container {
+        width: 60px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .discord-button {
+        padding: 8px 16px;
+        font-size: 12px;
+        right: 10px;
+    }
+
+    .search-container {
+        width: calc(100% - 120px); /* Ширина поля поиска занимает оставшееся пространство */
+        right: 10px;
+        top: 60px; /* Перемещаем ниже логотипа */
+    }
+}
+
+/* Скрываем кнопку Discord и поле поиска на очень маленьких экранах (например, телефоны) */
+@media (max-width: 480px) {
+    .discord-button, .search-container, .logo-container {
+        display: none; /* Скрываем элементы */
+    }
+
+    .logo-container {
+        left: 50%;
+        transform: translateX(-50%); /* Центрируем логотип */
+        top: 10px;
+    }
+}
